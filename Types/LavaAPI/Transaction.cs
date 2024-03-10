@@ -9,11 +9,34 @@ namespace Lava.NET.Types.LavaAPI
 
     public class TransactionParam : IBase
     {
+        /// <summary>
+        /// Тип перевода
+        /// withdraw - вывод
+        /// transfer - перевод
+        /// </summary>
         public string? transfer_type { get; set; }
+        /// <summary>
+        /// Номер кошелька
+        /// </summary>
         public string? account { get; set; }
+        /// <summary>
+        /// С какого периода показывать транзакции
+        /// Пример: 21.10.2021 10:30:30
+        /// </summary>
         public string? period_start { get; set; }
+        /// <summary>
+        /// До какого времени показывать транзакции
+        /// 
+        /// Пример: 21.10.2021 11:30:00
+        /// </summary>
         public string? period_end { get; set; }
+        /// <summary>
+        /// Сдвиг
+        /// </summary>
         public int? offset { get; set; }
+        /// <summary>
+        /// Лимит
+        /// </summary>
         public int? limit { get; set; }
     }
 

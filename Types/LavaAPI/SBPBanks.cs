@@ -8,7 +8,13 @@ namespace Lava.NET.Types.LavaAPI
 {
     public class Datum : IBase
     {
+        /// <summary>
+        /// ID банка
+        /// </summary>
         public object id { get; set; }
+        /// <summary>
+        /// Название
+        /// </summary>
         public string name { get; set; }
     }
 
