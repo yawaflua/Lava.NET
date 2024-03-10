@@ -1,44 +1,44 @@
 # Lava.NET
-Библиотека для работы с API сайта lava.ru.
-Пока что ведется работа над бизнес-частью API
+Р‘РёР±Р»РёРѕС‚РµРєР° РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ API СЃР°Р№С‚Р° lava.ru.
+РџРѕРєР° С‡С‚Рѕ РІРµРґРµС‚СЃСЏ СЂР°Р±РѕС‚Р° РЅР°Рґ Р±РёР·РЅРµСЃ-С‡Р°СЃС‚СЊСЋ API
 
-Советуется перед использованием прочитать [API сайта lava.ru](https://dev.lava.ru/)
-# Примеры
-## Установка бибилотеки
+РЎРѕРІРµС‚СѓРµС‚СЃСЏ РїРµСЂРµРґ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РїСЂРѕС‡РёС‚Р°С‚СЊ [API СЃР°Р№С‚Р° lava.ru](https://dev.lava.ru/)
+# РџСЂРёРјРµСЂС‹
+## РЈСЃС‚Р°РЅРѕРІРєР° Р±РёР±РёР»РѕС‚РµРєРё
 ```bash
 dotnet add package Lava.NET
 ```
-### И использлование в проекте
+### Р РёСЃРїРѕР»СЊР·Р»РѕРІР°РЅРёРµ РІ РїСЂРѕРµРєС‚Рµ
 ```cs
 using Lava.NET;
 public class Program 
 {
     public static async Task Main(string[] args)
     {
-        var publicLavaApi = new PublicLavaAPI("[ Ваш токен ]");
-        // ... Ваша логика
+        var publicLavaApi = new PublicLavaAPI("[ Р’Р°С€ С‚РѕРєРµРЅ ]");
+        // ... Р’Р°С€Р° Р»РѕРіРёРєР°
     }
 }
 ```
-## Пример использования с ASP.NET приложением:
+## РџСЂРёРјРµСЂ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ СЃ ASP.NET РїСЂРёР»РѕР¶РµРЅРёРµРј:
 ```cs
 // Startup.cs
 
 public void ConfigureServices(IServiceCollection services)
 {
-    var publicLavaApi = new PublicLavaAPI("[ Ваш токен ]");
+    var publicLavaApi = new PublicLavaAPI("[ Р’Р°С€ С‚РѕРєРµРЅ ]");
     services.AddControllers();
     services
             
             .AddSwaggerGen();
 
     services
-        // ...Настройка приложения
+        // ...РќР°СЃС‚СЂРѕР№РєР° РїСЂРёР»РѕР¶РµРЅРёСЏ
         .AddSingleton(publicLavaAPI);
 }
 ```
 
-## Пример работы с вебхуком(.NET 8):
+## РџСЂРёРјРµСЂ СЂР°Р±РѕС‚С‹ СЃ РІРµР±С…СѓРєРѕРј(.NET 8):
 ```cs
 // PaymentController.cs
 
@@ -51,24 +51,24 @@ public class PaymentController(PublicLavaAPI lavaAPI) : ControllerBase
     [HttpPost("lava")]
     public async Task<IActionResult> ValidatePaymentLava([FromBody] WebhookResponse webhookResponse)
     {
-        // Ваша логика
+        // Р’Р°С€Р° Р»РѕРіРёРєР°
         
-        return Ok(); // Обязательно отвечать 200, иначе вебхуки будут приходить снова и снова, до 15 раз. 
+        return Ok(); // РћР±СЏР·Р°С‚РµР»СЊРЅРѕ РѕС‚РІРµС‡Р°С‚СЊ 200, РёРЅР°С‡Рµ РІРµР±С…СѓРєРё Р±СѓРґСѓС‚ РїСЂРёС…РѕРґРёС‚СЊ СЃРЅРѕРІР° Рё СЃРЅРѕРІР°, РґРѕ 15 СЂР°Р·. 
     }
 }
 ```
 
-## Создание ссылки на оплату:
+## РЎРѕР·РґР°РЅРёРµ СЃСЃС‹Р»РєРё РЅР° РѕРїР»Р°С‚Сѓ:
 ```cs
-var publicLavaApi = new PublicLavaAPI("[Ваш токен]");
+var publicLavaApi = new PublicLavaAPI("[Р’Р°С€ С‚РѕРєРµРЅ]");
 var createdPayment = await publicLavaApi.CreatePaymentAsync(
 	new (){
-            comment = "Оплата покупки в Telegram боте", // Необ.
-            hook_url = $"https://example.com/api/payment/lava", // Необ.
-            merchant_id = "AskMeAboutBOT", // Необ.
-            merchant_name = "AskMeAboutBOT", // Необ.
-            custom_fields = $"Любые кастомные данные, передаваемые в webhook", // Необ.
-            success_url = $"https://example.com/", // Необ.
+            comment = "РћРїР»Р°С‚Р° РїРѕРєСѓРїРєРё РІ Telegram Р±РѕС‚Рµ", // РќРµРѕР±.
+            hook_url = $"https://example.com/api/payment/lava", // РќРµРѕР±.
+            merchant_id = "AskMeAboutBOT", // РќРµРѕР±.
+            merchant_name = "AskMeAboutBOT", // РќРµРѕР±.
+            custom_fields = $"Р›СЋР±С‹Рµ РєР°СЃС‚РѕРјРЅС‹Рµ РґР°РЅРЅС‹Рµ, РїРµСЂРµРґР°РІР°РµРјС‹Рµ РІ webhook", // РќРµРѕР±.
+            success_url = $"https://example.com/", // РќРµРѕР±.
             sum = 39.00f,
             wallet_to = "R123123123"
 	}
